@@ -3,42 +3,40 @@
 SSH into your VPS and run:
 
 Update and install system packages
-sudo apt update
-sudo apt upgrade -y
-sudo apt install -y python3 python3-venv python3-pip nginx git curl
+a. sudo apt update
+b. sudo apt upgrade -y
+c. sudo apt install -y python3 python3-venv python3-pip nginx git curl
 
 (Optional) Create a deploy user
-sudo adduser --disabled-password --gecos "" deploy
-sudo usermod -aG sudo deploy
-Then SSH as deploy or continue with your current user
+a. sudo adduser --disabled-password --gecos "" deploy
+b. sudo usermod -aG sudo deploy
+c. Then SSH as deploy or continue with your current user
 
 Clone your repo (example path)
-sudo mkdir -p /opt/schoolsearch
-sudo chown $USER:$USER /opt/schoolsearch
-git clone 'REPLACE_WITH_YOUR_REPO_URL' /opt/schoolsearch
-
-cd /opt/schoolsearch
+a. sudo mkdir -p /opt/schoolsearch
+b. sudo chown $USER:$USER /opt/schoolsearch
+c. git clone 'REPLACE_WITH_YOUR_REPO_URL' /opt/schoolsearch
+d. cd /opt/schoolsearch
 
 Create venv and install requirements
-python3 -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
+a. python3 -m venv .venv
+b. source .venv/bin/activate
+c. pip install --upgrade pip
+d. pip install -r requirements.txt
 
 2️⃣ Set the GOOGLE_API_KEY Securely (systemd EnvironmentFile)
 Create an environment file:
-sudo tee /etc/schoolsearch.env > /dev/null <<'EOF'
+a. sudo tee /etc/schoolsearch.env > /dev/null <<'EOF'
 GOOGLE_API_KEY=REPLACE_WITH_YOUR_GOOGLE_API_KEY
 Add other environment variables here if needed
 EOF
-
-sudo chmod 600 /etc/schoolsearch.env
+b. sudo chmod 600 /etc/schoolsearch.env
 
 
 
 3️⃣ Create a systemd Service for Gunicorn
 Create the service file:
-sudo nano /etc/systemd/system/schoolsearch.service
+a. sudo nano /etc/systemd/system/schoolsearch.service
 
 
 Paste:
@@ -62,15 +60,15 @@ WantedBy=multi-user.target
 Adjust User, WorkingDirectory, and venv path if needed.
 
 4️⃣ Start and Enable the Service
-sudo systemctl daemon-reload
-sudo systemctl enable --now schoolsearch.service
-sudo systemctl status schoolsearch.service
+a. sudo systemctl daemon-reload
+b. sudo systemctl enable --now schoolsearch.service
+c. sudo systemctl status schoolsearch.service
 
 
 
 5️⃣ Configure Nginx Reverse Proxy
 Create the site config:
-sudo nano /etc/nginx/sites-available/schoolsearch
+a. sudo nano /etc/nginx/sites-available/schoolsearch
 
 
 Paste:
@@ -98,9 +96,9 @@ server {
 
 
 Enable and test:
-sudo ln -s /etc/nginx/sites-available/schoolsearch /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl restart nginx
+a. sudo ln -s /etc/nginx/sites-available/schoolsearch /etc/nginx/sites-enabled/
+b. sudo nginx -t
+c. sudo systemctl restart nginx
 
 
 
@@ -115,8 +113,8 @@ In Cloudflare DNS:
 
 
 7️⃣ Obtain TLS Certificate (Certbot)
-sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d your_domain_name.com
+a. sudo apt install -y certbot python3-certbot-nginx
+b. sudo certbot --nginx -d your_domain_name.com
 
 
 Follow prompts to install HTTPS automatically.
@@ -128,9 +126,9 @@ After cert is issued:
 If HTTP challenge renewal fails, switch back to DNS-only or configure DNS challenge via Cloudflare API.
 
 9️⃣ Firewall (UFW)
-sudo ufw allow 'Nginx Full'
-sudo ufw enable
-sudo ufw status
+a. sudo ufw allow 'Nginx Full'
+b. sudo ufw enable
+c. sudo ufw status
 
 
 🔟 Verify Deployment
