@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Sto. Niño the Shepherd School",
+    "latitude": 14.611777,
+    "longitude": 121.093068,
+    "rating": null,
+    "user_ratings_total": null,
+    "address": "8 Sterly, Pasig",
+    "place_id": "ChIJdxBqBRe4lzMRZQLg282IiwA"
+  },
+  {
+    "name": "Karangalan Elementary School",
+    "latitude": 14.6095646,
+    "longitude": 121.1062045,
+    "rating": null,
+    "user_ratings_total": null,
+    "address": "J454+RFG, Karangalan Drive, Cainta",
+    "place_id": "ChIJ9d4Uumu4lzMRe1tRi4nQqYU"
+  }
+]
