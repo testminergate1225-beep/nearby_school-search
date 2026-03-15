@@ -39,7 +39,8 @@ Create the service file:
 - sudo nano /etc/systemd/system/schoolsearch.service
 
 
-Paste:
+Paste:;
+{
 [Unit]
 Description=SchoolSearch Gunicorn Service
 After=network.target
@@ -55,8 +56,8 @@ RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
+}
 
-
 Adjust User, WorkingDirectory, and venv path if needed.
 
 4️⃣ Start and Enable the Service
@@ -100,7 +101,6 @@ Enable and test:
 - sudo nginx -t
 - sudo systemctl restart nginx
 
-
 
 6️⃣ Cloudflare DNS Setup
 In Cloudflare DNS:
