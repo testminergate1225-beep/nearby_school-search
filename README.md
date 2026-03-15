@@ -39,12 +39,11 @@ Create the service file:
 - sudo nano /etc/systemd/system/schoolsearch.service
 
 
-Paste:;
-{
+Paste:
+- 
 [Unit]
 Description=SchoolSearch Gunicorn Service
 After=network.target
-
 [Service]
 User=deploy
 Group=www-data
@@ -53,10 +52,9 @@ WorkingDirectory=/opt/schoolsearch
 ExecStart=/opt/schoolsearch/.venv/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 run-search:app
 Restart=always
 RestartSec=5
-
 [Install]
 WantedBy=multi-user.target
-}
+
 
 Adjust User, WorkingDirectory, and venv path if needed.
 
@@ -73,6 +71,7 @@ Create the site config:
 
 
 Paste:
+- 
 server {
     listen 80;
     server_name your_domain_name.com;
