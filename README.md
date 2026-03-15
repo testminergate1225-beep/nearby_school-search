@@ -1,4 +1,4 @@
-1. Basic system setup, clone repo, and create virtualenv
+#1. Basic system setup, clone repo, and create virtualenv
 
 SSH to the VPS and run:
 
@@ -35,7 +35,7 @@ GOOGLE_API_KEY=REPLACE_WITH_YOUR_GOOGLE_API_KEY
 EOF
 sudo chmod 600 /etc/schoolsearch.env
 
-3. Create a systemd service to run Gunicorn
+#3. Create a systemd service to run Gunicorn
 Create /etc/systemd/system/schoolsearch.service with the following content:
 
 nano /etc/systemd/system/schoolsearch.service
@@ -59,13 +59,13 @@ WantedBy=multi-user.target
 
 Adjust User, WorkingDirectory, and path to venv if different.
 
-4. Start and enable the service
+#4. Start and enable the service
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now schoolsearch.service
 sudo systemctl status schoolsearch.service
 
-5. Configure nginx as reverse proxy for your domain_name.com
+#5. Configure nginx as reverse proxy for your domain_name.com
 Create nginx site file /etc/nginx/sites-available/schoolsearch:
 
 nano /etc/nginx/sites-available/schoolsearch
@@ -102,7 +102,7 @@ sudo ln -s /etc/nginx/sites-available/schoolsearch /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx
 
-6. Setup Cloudflare DNS (exact steps)
+#6. Setup Cloudflare DNS (exact steps)
 
 In Cloudflare DNS panel for your_domain_name.com:
 Add an A record:
@@ -111,7 +111,7 @@ IPv4 address: your VPS public IP (e.g., 203.0.113.12)
 Proxy status: set to DNS only (grey cloud) for now
 Save.
 
-7. Obtain TLS certificate with Certbot (Let's Encrypt)
+#7. Obtain TLS certificate with Certbot (Let's Encrypt)
 Install certbot and the nginx plugin:
 
 sudo apt install -y certbot python3-certbot-nginx
@@ -119,19 +119,19 @@ sudo certbot --nginx -d your_domain_name.com
 
 Follow prompts to get cert and let certbot update nginx to use the cert.
 
-8. Optional: If you prefer Cloudflare proxy
+#8. Optional: If you prefer Cloudflare proxy
 
 After cert is issued, you may enable the Cloudflare proxy (orange cloud). Then in Cloudflare SSL/TLS settings choose "Full (strict)":
 For Full (strict) you can use the Let's Encrypt certificate already on your origin. If you want extra safety, you can install a Cloudflare Origin Certificate on the origin and configure nginx with that key instead.
 If you enable the proxy and run into issues with HTTP challenge renewal, leave the DNS as DNS-only and use certbot or configure DNS challenge via Cloudflare API (more advanced).
 
-9. Firewall (UFW) allow HTTP/HTTPS and restrict other ports
+#9. Firewall (UFW) allow HTTP/HTTPS and restrict other ports
 
 sudo ufw allow 'Nginx Full'
 sudo ufw enable
 sudo ufw status
 
-10. Verify site
+#10. Verify site
 Visit https://schoolsearch.your_domain_name.com/ — you should see your index.html.
 Click Search to run run-search endpoint; check schools.json is updated and school-list.html shows distances based on center.
 Notes about distance accuracy
