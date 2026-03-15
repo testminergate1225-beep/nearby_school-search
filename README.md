@@ -39,7 +39,8 @@ Create the service file:
 - sudo nano /etc/systemd/system/schoolsearch.service
 
 Paste:
--
+-    
+
 [Unit]
 Description=SchoolSearch Gunicorn Service
 After=network.target
@@ -53,7 +54,8 @@ Restart=always
 RestartSec=5
 [Install]
 WantedBy=multi-user.target
--
+
+-   
 
 Adjust User, WorkingDirectory, and venv path if needed.
 
