@@ -54,7 +54,7 @@ Restart=always
 RestartSec=5
 [Install]
 WantedBy=multi-user.target
-
+-
 
 Adjust User, WorkingDirectory, and venv path if needed.
 
@@ -93,7 +93,7 @@ server {
         proxy_read_timeout 90;
     }
 }
-
+- 
 
 Enable and test:
 - sudo ln -s /etc/nginx/sites-available/schoolsearch /etc/nginx/sites-enabled/
