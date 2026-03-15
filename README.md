@@ -38,9 +38,8 @@ EOF
 Create the service file:
 - sudo nano /etc/systemd/system/schoolsearch.service
 
-
 Paste:
-- 
+-
 [Unit]
 Description=SchoolSearch Gunicorn Service
 After=network.target
